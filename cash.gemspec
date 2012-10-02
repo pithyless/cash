@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["wojtowicz.norbert@gmail.com"]
   gem.description   = "Money model backed by BigDecimal"
   gem.summary       = gem.description
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/pithyless/cash"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
