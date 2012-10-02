@@ -10,3 +10,10 @@ Backed by BigDecimal, so it can store arbitrary-precision values without roundin
 
 Safe and strict. Fail fast approach let's you sleep like a baby.
 
+## Credits
+
+Huge thanks go out to:
+
+  * The guys from money gem, helping rid the world of floating finances
+  * The guys from big_money gem, helping to spread the word that BigDecimal is bigger and better
+  * Luca Guidi for being awesome and giving up the cash gem name ;]
