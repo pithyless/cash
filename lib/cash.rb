@@ -1,5 +1,5 @@
-require "cash/version"
+require "cash/currency"
+require "cash/currency/iso4217"
 
-module Cash
-  # Your code goes here...
+class Cash
 end
