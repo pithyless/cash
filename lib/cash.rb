@@ -16,12 +16,19 @@ class Cash
   attr_reader :amount, :currency
 
   def StrictDecimal(arg)
-    if arg.is_a?(Float)
+    case arg
+    when BigDecimal
+      arg
+    when Float
       fail ArgumentError, "innacurate float for StrictDecimal(): #{arg.inspect}"
+    when Integer
+      BigDecimal(arg.to_s)
+    when String
+      Float(arg)
+      BigDecimal(arg)
+    else
+      fail TypeError
     end
-
-    Float(arg)
-    BigDecimal(arg)
   rescue TypeError
     fail ArgumentError, "invalid value for StrictDecimal(): #{arg.inspect}"
   end

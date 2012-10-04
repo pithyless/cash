@@ -46,7 +46,7 @@ describe Cash::Currency do
     end
 
     it 'fails for missing currency' do
-      ->{ Cash::Currency.find!('zzz') }.should raise_error(ArgumentError)
+      expect{ Cash::Currency.find!('zzz') }.to raise_error(ArgumentError)
     end
   end
 
