@@ -7,7 +7,7 @@ describe Cash do
   describe '#initialize' do
 
     let(:currency) { Cash::Currency::USD }
-    let(:big_one) { BigDecimal.new('1.0') }
+    let(:big_one) { BigDecimal('1.0') }
     let(:one) { '1.0' }
 
     context 'amount' do
