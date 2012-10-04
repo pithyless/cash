@@ -24,19 +24,19 @@ describe Cash do
       end
 
       it 'fails with float' do
-        ->{ Cash.new(Float(one), currency) }.should raise_error(ArgumentError)
+        expect{ Cash.new(Float(one), currency) }.to raise_error(ArgumentError)
       end
 
       it 'fails with nil object' do
-        ->{ Cash.new(nil, currency) }.should raise_error(ArgumentError)
+        expect{ Cash.new(nil, currency) }.to raise_error(ArgumentError)
       end
 
       it 'fails with other object' do
-        ->{ Cash.new(Object.new, currency) }.should raise_error(ArgumentError)
+        expect{ Cash.new(Object.new, currency) }.to raise_error(ArgumentError)
       end
 
       it 'fails with invalid string' do
-        ->{ Cash.new('silly', currency) }.should raise_error(ArgumentError)
+        expect{ Cash.new('silly', currency) }.to raise_error(ArgumentError)
       end
     end
 
@@ -55,15 +55,15 @@ describe Cash do
       end
 
       it 'fails with missing currency' do
-        ->{ Cash.new(1, 'zzz') }.should raise_error(ArgumentError)
+        expect{ Cash.new(1, 'zzz') }.to raise_error(ArgumentError)
       end
 
       it 'fails with nil object' do
-        ->{ Cash.new(1, nil) }.should raise_error(ArgumentError)
+        expect{ Cash.new(1, nil) }.to raise_error(ArgumentError)
       end
 
       it 'fails with other object' do
-        ->{ Cash.new(1, Object.new) }.should raise_error(ArgumentError)
+        expect{ Cash.new(1, Object.new) }.to raise_error(ArgumentError)
       end
     end
 
@@ -109,11 +109,11 @@ describe Cash do
       it { (Cash.new(3, :usd) <=> Cash.new(2, :usd)).should == 1 }
 
       it 'fails for different currencies' do
-        ->{ Cash.new(1, :pln) <=> Cash.new(1, :usd) }.should raise_error(TypeError)
+        expect{ Cash.new(1, :pln) <=> Cash.new(1, :usd) }.to raise_error(TypeError)
       end
 
       it 'fails for non-cash' do
-        ->{ Cash.new(1, :pln) <=> 1 }.should raise_error(TypeError)
+        expect{ Cash.new(1, :pln) <=> 1 }.to raise_error(TypeError)
       end
     end
 
@@ -124,7 +124,7 @@ describe Cash do
     it { (Cash.new('1.234', :usd) != Cash.new('1.23', :usd)).should be_true }
 
     it 'fails for different currencies' do
-      ->{ Cash.new(1, :usd) < Cash.new(1, :pln) }.should raise_error(TypeError)
+      expect{ Cash.new(1, :usd) < Cash.new(1, :pln) }.to raise_error(TypeError)
     end
   end
 
@@ -141,7 +141,7 @@ describe Cash do
       end
 
       it 'fails for different currencies' do
-        ->{ one_usd + two_pln }.should raise_error(TypeError)
+        expect{ one_usd + two_pln }.to raise_error(TypeError)
       end
     end
 
@@ -151,7 +151,7 @@ describe Cash do
       end
 
       it 'fails for different currencies' do
-        ->{ three_usd - two_pln }.should raise_error(TypeError)
+        expect{ three_usd - two_pln }.to raise_error(TypeError)
       end
     end
   end
