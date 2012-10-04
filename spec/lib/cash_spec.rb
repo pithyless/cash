@@ -69,4 +69,25 @@ describe Cash do
 
   end
 
+  describe '#to_s' do
+    it 'displays Euro' do
+       Cash.new('100.3', :eur).to_s.should == '€100.30'
+    end
+
+    it 'displays Dollar' do
+       Cash.new('9999', :usd).to_s.should == '$9999.00'
+    end
+
+    it 'displays other currencies' do
+       Cash.new('.123', :pln).to_s.should == '0.12 PLN'
+    end
+  end
+
+  describe '#inspect' do
+    it 'displays value and currency' do
+       Cash.new('100.3', :eur).inspect.should == '<Cash 100.30 EUR>'
+    end
+  end
+
 end
+

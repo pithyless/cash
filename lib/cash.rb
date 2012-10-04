@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'bigdecimal'
 
 require "cash/currency"
@@ -19,6 +21,34 @@ class Cash
     BigDecimal(value)
   rescue TypeError
     fail ArgumentError, "invalid value for StrictDecimal(): #{amount}"
+  end
+
+  def to_s
+    Format.display(self)
+  end
+
+  def inspect
+    val = '%.2f' % amount
+    "<Cash #{val} #{currency.code}>"
+  end
+
+
+  module Format
+    CURRENCIES = {
+      'EUR' => '€',
+      'USD' => '$'
+    }.freeze
+
+    def self.display(cash)
+      amount = '%.2f' % cash.amount.round(2)
+      currency_code = cash.currency.code
+
+      if sym = CURRENCIES[currency_code]
+        "#{sym}#{amount}"
+      else
+        "#{amount} #{currency_code}"
+      end
+    end
   end
 
 end
