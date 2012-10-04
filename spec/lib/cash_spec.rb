@@ -89,5 +89,36 @@ describe Cash do
     end
   end
 
-end
+  context 'comparable' do
+    describe '#==' do
+      it { Cash.new(1, :usd).should == Cash.new(1, :usd) }
+      it { Cash.new(2, :usd).should_not == Cash.new(1, :usd) }
+      it { Cash.new(1, :pln).should_not == Cash.new(1, :usd) }
+    end
 
+    describe '#<=>' do
+      it { (Cash.new(1, :usd) <=> Cash.new(2, :usd)).should == -1 }
+      it { (Cash.new(2, :usd) <=> Cash.new(2, :usd)).should == 0 }
+      it { (Cash.new(3, :usd) <=> Cash.new(2, :usd)).should == 1 }
+
+      it 'fails for different currencies' do
+        ->{ Cash.new(1, :pln) <=> Cash.new(1, :usd) }.should raise_error(TypeError)
+      end
+
+      it 'fails for non-cash' do
+        ->{ Cash.new(1, :pln) <=> 1 }.should raise_error(TypeError)
+      end
+    end
+
+    it { (Cash.new(1, :usd) < Cash.new(2, :usd)).should be_true }
+    it { (Cash.new(3, :usd) >= Cash.new(3, :usd)).should be_true }
+    it { (Cash.new(3, :usd) == Cash.new(3, :usd)).should be_true }
+    it { (Cash.new(3, :pln) != Cash.new(3, :usd)).should be_true }
+    it { (Cash.new('1.234', :usd) != Cash.new('1.23', :usd)).should be_true }
+
+    it 'fails for different currencies' do
+      ->{ Cash.new(1, :usd) < Cash.new(1, :pln) }.should raise_error(TypeError)
+    end
+  end
+
+end

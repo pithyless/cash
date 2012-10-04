@@ -6,6 +6,9 @@ require "cash/currency"
 require "cash/currency/iso4217"
 
 class Cash
+  include Comparable
+  include Equalable
+
   def initialize(amount, currency)
     @amount, @currency = StrictDecimal(amount), Currency.find!(currency)
   end
@@ -30,6 +33,23 @@ class Cash
   def inspect
     val = '%.2f' % amount
     "<Cash #{val} #{currency.code}>"
+  end
+
+  def <=>(o)
+    check_type(o, :compare)
+    amount <=> o.amount
+  end
+
+  protected
+
+  def equality_state
+    [amount, currency]
+  end
+
+  def check_type(o, method)
+    unless o.instance_of?(self.class) && o.currency == currency
+      raise TypeError, "cannot #{method} #{self.inspect} to #{o.inspect}"
+    end
   end
 
 
