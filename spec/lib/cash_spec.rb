@@ -121,4 +121,32 @@ describe Cash do
     end
   end
 
+  context 'arithmetic' do
+    let(:one_usd) { Cash.new(1, :usd) }
+    let(:two_usd) { Cash.new(2, :usd) }
+    let(:three_usd) { Cash.new(3, :usd) }
+    let(:two_pln) { Cash.new(2, :pln) }
+
+
+    describe 'addition' do
+      it 'adds amounts' do
+        (one_usd + two_usd).should == three_usd
+      end
+
+      it 'fails for different currencies' do
+        ->{ one_usd + two_pln }.should raise_error(TypeError)
+      end
+    end
+
+    describe 'subtraction' do
+      it 'subtracts amounts' do
+        (three_usd - one_usd).should == two_usd
+      end
+
+      it 'fails for different currencies' do
+        ->{ three_usd - two_pln }.should raise_error(TypeError)
+      end
+    end
+  end
+
 end

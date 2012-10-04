@@ -40,6 +40,16 @@ class Cash
     amount <=> o.amount
   end
 
+  def +(o)
+    check_type(o, :add)
+    Cash.new(amount + o.amount, currency)
+  end
+
+  def -(o)
+    check_type(o, :subtract)
+    Cash.new(amount - o.amount, currency)
+  end
+
   protected
 
   def equality_state
