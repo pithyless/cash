@@ -29,8 +29,24 @@ describe Cash::Currency do
       end
     end
 
+    it 'returns self for currency' do
+      currency = Cash::Currency::USD
+      Cash::Currency.find(currency).should equal(currency)
+    end
+
     it 'returns nil for missing currency' do
       Cash::Currency.find('zzz').should be_nil
+    end
+  end
+
+
+  describe '::find!' do
+    it 'returns currency' do
+      Cash::Currency.find!('usd').should == Cash::Currency::USD
+    end
+
+    it 'fails for missing currency' do
+      ->{ Cash::Currency.find!('zzz') }.should raise_error(ArgumentError)
     end
   end
 

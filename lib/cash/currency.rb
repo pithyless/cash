@@ -19,8 +19,13 @@ class Cash
     class << self
 
       def find(currency)
+        return currency if currency.kind_of?(self)
         currency = currency.to_s.upcase
         all.find{ |c| c.code == currency }
+      end
+
+      def find!(currency)
+        find(currency) or fail ArgumentError, "unknown currency: #{currency}"
       end
 
       def all
