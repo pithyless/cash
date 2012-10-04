@@ -31,8 +31,11 @@ class Cash
   end
 
   def inspect
-    val = '%.2f' % amount
-    "<Cash #{val} #{currency.code}>"
+    "<Cash #{amount_string} #{currency.code}>"
+  end
+
+  def amount_string
+   "%.#{currency.offset}f" % amount.round(currency.offset)
   end
 
   def <=>(o)
@@ -70,7 +73,7 @@ class Cash
     }.freeze
 
     def self.display(cash)
-      amount = '%.2f' % cash.amount.round(2)
+      amount = cash.amount_string
       currency_code = cash.currency.code
 
       if sym = CURRENCIES[currency_code]

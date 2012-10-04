@@ -71,15 +71,22 @@ describe Cash do
 
   describe '#to_s' do
     it 'displays Euro' do
-       Cash.new('100.3', :eur).to_s.should == '€100.30'
+      Cash.new('100.3', :eur).to_s.should == '€100.30'
     end
 
     it 'displays Dollar' do
-       Cash.new('9999', :usd).to_s.should == '$9999.00'
+      Cash.new('9999', :usd).to_s.should == '$9999.00'
     end
 
     it 'displays other currencies' do
-       Cash.new('.123', :pln).to_s.should == '0.12 PLN'
+      Cash.new('.123', :pln).to_s.should == '0.12 PLN'
+    end
+
+    it 'displays correct offset' do
+      Cash.new('123.4567', :jpy).to_s.should == '123 JPY'
+      Cash.new('123.4567', :twd).to_s.should == '123.5 TWD'
+      Cash.new('123.4567', :pln).to_s.should == '123.46 PLN'
+      Cash.new('123.4567', :bhd).to_s.should == '123.457 BHD'
     end
   end
 
