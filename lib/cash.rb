@@ -60,6 +60,13 @@ class Cash
     Cash.new(amount - o.amount, currency)
   end
 
+  def *(factor)
+    factor = StrictDecimal(factor)
+    Cash.new(amount * factor, currency)
+  rescue ArgumentError
+    raise ArgumentError, "cannot multiply #{self.inspect} by #{factor}"
+  end
+
   protected
 
   def equality_state

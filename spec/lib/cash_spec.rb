@@ -154,6 +154,20 @@ describe Cash do
         expect{ three_usd - two_pln }.to raise_error(TypeError)
       end
     end
+
+    describe 'multiplication' do
+      it 'multiplies amount by bigdecimal' do
+        double = one_usd * 2
+        double.should == Cash.new(2, :usd)
+
+        tax = three_usd * BigDecimal.new('0.17')
+        tax.should == Cash.new('0.51', :usd)
+      end
+
+      it 'fails if multiplying cash by cash' do
+        expect{ one_usd * one_usd }.to raise_error(ArgumentError)
+      end
+    end
   end
 
 end
