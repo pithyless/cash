@@ -183,6 +183,17 @@ describe Cash do
         expect{ one_usd * one_usd }.to raise_error(ArgumentError)
       end
     end
+
+    describe 'division' do
+      it 'divides amount by bigdecimal' do
+        split = one_usd / BigDecimal.new('4')
+        split.should == Cash.new('0.25', 'USD')
+      end
+
+      it 'fails if multiplying cash by cash' do
+        expect{ two_usd / one_usd }.to raise_error(ArgumentError)
+      end
+    end
   end
 
 end

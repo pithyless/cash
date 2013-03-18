@@ -71,6 +71,14 @@ class Cash
     raise ArgumentError, "cannot multiply #{self.inspect} by #{factor}"
   end
 
+  def /(factor)
+    factor = StrictDecimal(factor)
+    Cash.new(amount / factor, currency)
+  rescue ArgumentError
+    raise ArgumentError, "cannot divide #{self.inspect} by #{factor}"
+  end
+
+
   protected
 
   def equality_state
