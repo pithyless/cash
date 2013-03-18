@@ -111,6 +111,15 @@ describe Cash do
     end
   end
 
+  describe '#to_h' do
+    it 'returns serialized hash' do
+       Cash.new('100.3', :eur).to_h.should == {
+         amount: '100.30',
+         currency: 'EUR'
+       }
+    end
+  end
+
   context 'comparable' do
     describe '#==' do
       it { Cash.new(1, :usd).should == Cash.new(1, :usd) }

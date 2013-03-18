@@ -45,6 +45,13 @@ class Cash
     "<Cash #{to_s}>"
   end
 
+  def to_h
+    {
+      amount: amount_string,
+      currency: currency.code
+    }
+  end
+
   def amount_string
    "%.#{currency.offset}f" % amount.round(currency.offset)
   end
