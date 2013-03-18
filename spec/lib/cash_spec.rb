@@ -70,15 +70,9 @@ describe Cash do
   end
 
   describe '#to_s' do
-    it 'displays Euro' do
-      Cash.new('100.3', :eur).to_s.should == '€100.30'
-    end
-
-    it 'displays Dollar' do
-      Cash.new('9999', :usd).to_s.should == '$9999.00'
-    end
-
-    it 'displays other currencies' do
+    it 'displays amount and currency' do
+      Cash.new('100.3', :eur).to_s.should == '100.30 EUR'
+      Cash.new('9999', :usd).to_s.should == '9999.00 USD'
       Cash.new('.123', :pln).to_s.should == '0.12 PLN'
     end
 
@@ -87,6 +81,27 @@ describe Cash do
       Cash.new('123.4567', :twd).to_s.should == '123.5 TWD'
       Cash.new('123.4567', :pln).to_s.should == '123.46 PLN'
       Cash.new('123.4567', :bhd).to_s.should == '123.457 BHD'
+    end
+  end
+
+  describe '#pretty_print' do
+    it 'displays Euro' do
+      Cash.new('100.3', :eur).pretty_print.should == '€100.30'
+    end
+
+    it 'displays Dollar' do
+      Cash.new('9999', :usd).pretty_print.should == '$9999.00'
+    end
+
+    it 'displays other currencies' do
+      Cash.new('.123', :pln).pretty_print.should == '0.12 PLN'
+    end
+
+    it 'displays correct offset' do
+      Cash.new('123.4567', :jpy).pretty_print.should == '123 JPY'
+      Cash.new('123.4567', :twd).pretty_print.should == '123.5 TWD'
+      Cash.new('123.4567', :pln).pretty_print.should == '123.46 PLN'
+      Cash.new('123.4567', :bhd).pretty_print.should == '123.457 BHD'
     end
   end
 

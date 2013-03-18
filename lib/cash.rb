@@ -33,12 +33,16 @@ class Cash
     fail ArgumentError, "invalid value for StrictDecimal(): #{arg.inspect}"
   end
 
-  def to_s
+  def pretty_print
     Format.display(self)
   end
 
+  def to_s
+    "#{amount_string} #{currency.code}"
+  end
+
   def inspect
-    "<Cash #{amount_string} #{currency.code}>"
+    "<Cash #{to_s}>"
   end
 
   def amount_string
