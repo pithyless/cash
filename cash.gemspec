@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "cash"
-  gem.version       = '0.2.0'
+  gem.version       = '0.2.1'
   gem.authors       = ["Norbert Wojtowicz"]
   gem.email         = ["wojtowicz.norbert@gmail.com"]
   gem.description   = "Money model backed by BigDecimal"
