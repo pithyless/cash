@@ -47,8 +47,8 @@ class Cash
 
   def to_h
     {
-      amount: amount_string,
-      currency: currency.code
+      :amount => amount_string,
+      :currency => currency.code
     }
   end
 

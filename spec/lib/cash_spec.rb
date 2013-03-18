@@ -114,8 +114,8 @@ describe Cash do
   describe '#to_h' do
     it 'returns serialized hash' do
        Cash.new('100.3', :eur).to_h.should == {
-         amount: '100.30',
-         currency: 'EUR'
+         :amount => '100.30',
+         :currency => 'EUR'
        }
     end
   end
