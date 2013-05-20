@@ -205,4 +205,16 @@ describe Cash do
     end
   end
 
+  describe '#round' do
+    it 'rounds to the nearest whole number' do
+      Cash.new('1.21', 'USD').round.should == Cash.new('1', 'USD')
+    end
+
+    it 'always returns new object' do
+      cash = Cash.new('1', 'PLN')
+      cash.round.should eq(cash)
+      cash.round.should_not equal(cash)
+    end
+  end
+
 end

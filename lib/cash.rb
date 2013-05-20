@@ -56,6 +56,10 @@ class Cash
    "%.#{currency.offset}f" % amount.round(currency.offset)
   end
 
+  def round
+    Cash.new(amount.round, currency)
+  end
+
   def <=>(o)
     check_type(o, :compare)
     amount <=> o.amount
